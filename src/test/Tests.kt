@@ -2,7 +2,6 @@ package test
 
 import main.Graph
 import org.testng.annotations.Test
-import kotlin.test.assertEquals
 
 class Tests {
     val graph = Graph()
