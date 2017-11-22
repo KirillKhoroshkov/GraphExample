@@ -1,5 +1,7 @@
 package main
 
+import java.util.*
+
 class WeightedGraph {
 
     private val vertexes = mutableMapOf<Int, MutableMap<Int, Int>>()
@@ -23,5 +25,25 @@ class WeightedGraph {
         } else {
             throw NoSuchElementException()
         }
+    }
+
+    fun algorithmOfDijkstra(from: Int): Map<Int, Int>{
+        val deque = ArrayDeque<Pair<Int, Int>>()
+        deque.addLast(Pair(from, 0))
+        val visited = mutableMapOf<Int, Int>()
+        visited.put(from, 0)
+        while (!deque.isEmpty()){
+            val current = deque.pollFirst()
+            for (neighbor in getNeighbors(current.first)){
+                val distance = current.second + neighbor.value
+                if (!visited.containsKey(neighbor.key)){
+                    visited.put(neighbor.key, distance)
+                    deque.addLast(Pair(neighbor.key, distance))
+                } else if (visited[neighbor.key]!! > distance){
+                    visited.put(neighbor.key, distance)
+                }
+            }
+        }
+        return visited
     }
 }
