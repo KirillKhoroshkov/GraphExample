@@ -1,6 +1,7 @@
 package main
 
 import java.util.*
+import kotlin.NoSuchElementException
 
 class WeightedGraph {
 
@@ -27,23 +28,27 @@ class WeightedGraph {
         }
     }
 
-    fun algorithmOfDijkstra(from: Int): Map<Int, Int>{
-        val deque = ArrayDeque<Pair<Int, Int>>()
-        deque.addLast(Pair(from, 0))
-        val visited = mutableMapOf<Int, Int>()
-        visited.put(from, 0)
-        while (!deque.isEmpty()){
-            val current = deque.pollFirst()
-            for (neighbor in getNeighbors(current.first)){
-                val distance = current.second + neighbor.value
-                if (!visited.containsKey(neighbor.key)){
-                    visited.put(neighbor.key, distance)
-                    deque.addLast(Pair(neighbor.key, distance))
-                } else if (visited[neighbor.key]!! > distance){
-                    visited.put(neighbor.key, distance)
+    fun algorithmOfDijkstra(from: Int): Map<Int, Int> {
+        if (!vertexes.containsKey(from)) {
+            throw NoSuchElementException()
+        } else {
+            val deque = ArrayDeque<Pair<Int, Int>>()
+            deque.addLast(Pair(from, 0))
+            val visited = mutableMapOf<Int, Int>()
+            visited.put(from, 0)
+            while (!deque.isEmpty()) {
+                val current = deque.pollFirst()
+                for (neighbor in getNeighbors(current.first)) {
+                    val distance = current.second + neighbor.value
+                    if (!visited.containsKey(neighbor.key)) {
+                        visited.put(neighbor.key, distance)
+                        deque.addLast(Pair(neighbor.key, distance))
+                    } else if (visited[neighbor.key]!! > distance) {
+                        visited.put(neighbor.key, distance)
+                    }
                 }
             }
+            return visited
         }
-        return visited
     }
 }
