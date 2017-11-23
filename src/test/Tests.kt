@@ -21,7 +21,7 @@ class Tests {
         graph.makeNeighbors(5, 8)
         graph.makeNeighbors(8, 9)
         graph.makeNeighbors(5, 10)
-        graph.makeNeighbors(5, 11)
+        graph.makeNeighbors(10, 11)
     }
 
     @Test
@@ -31,14 +31,17 @@ class Tests {
         println(graph.DFS(3, 6))
         println(graph.DFS(2, 4))
         println(graph.DFS(4, 7))
+        println(graph.DFS(4, 9))
+        println(graph.DFS(4, 11))
     }
 
     @Test
     fun breadthFirstSearchTest(){
-        println(graph.breadthFirstSearch(1, 6))
+        /*println(graph.breadthFirstSearch(1, 6))
         println(graph.breadthFirstSearch(1, 4))
         println(graph.breadthFirstSearch(3, 6))
         println(graph.breadthFirstSearch(2, 4))
-        println(graph.breadthFirstSearch(4, 7))
+        println(graph.breadthFirstSearch(4, 7))*/
+        println(graph.breadthFirstSearch(5, 4))
     }
 }
