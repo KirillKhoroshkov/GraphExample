@@ -37,11 +37,11 @@ class Tests {
 
     @Test
     fun breadthFirstSearchTest(){
-        /*println(graph.breadthFirstSearch(1, 6))
+        println(graph.breadthFirstSearch(1, 6))
         println(graph.breadthFirstSearch(1, 4))
         println(graph.breadthFirstSearch(3, 6))
         println(graph.breadthFirstSearch(2, 4))
-        println(graph.breadthFirstSearch(4, 7))*/
+        println(graph.breadthFirstSearch(4, 7))
         println(graph.breadthFirstSearch(5, 4))
     }
 }

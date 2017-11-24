@@ -41,10 +41,12 @@ class Graph {
             deque.removeFirst()
             for (neighbor in getNeighbors(current.first)){
                 if (!visited.containsKey(neighbor)){
+                    print(neighbor.toString() + " ")
                     visited.put(neighbor, current.second + 1)
                     deque.addLast(Pair(neighbor, current.second + 1))
                 }
             }
+            println()
         }
         if (!deque.isEmpty()) {
             val way = mutableListOf<Int>()
@@ -87,10 +89,12 @@ class Graph {
             var hasNotVisitedNeighbors = false
             for (neighbor in getNeighbors(current)) {
                 if (!visited.contains(neighbor)) {
+                    print(neighbor.toString() + " ")
                     deque.push(neighbor)
                     hasNotVisitedNeighbors = true
                 }
             }
+            println()
             if (!hasNotVisitedNeighbors){
                 way.removeAt(way.lastIndex)
                 deque.pop()

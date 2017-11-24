@@ -41,12 +41,14 @@ class WeightedGraph {
                 for (neighbor in getNeighbors(current.first)) {
                     val distance = current.second + neighbor.value
                     if (!visited.containsKey(neighbor.key)) {
+                        print(neighbor.toString() + " ")
                         visited.put(neighbor.key, distance)
                         deque.addLast(Pair(neighbor.key, distance))
                     } else if (visited[neighbor.key]!! > distance) {
                         visited.put(neighbor.key, distance)
                     }
                 }
+                println()
             }
             return visited
         }
