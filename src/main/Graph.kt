@@ -28,62 +28,64 @@ class Graph {
         }
     }
 
-    fun breadthFirstSearch(from: Int, to: Int): List<Int> { //Поиск в ширину
-        val deque = ArrayDeque<Pair<Int, Int>>()
-        deque.addLast(Pair(from, 0))
+    fun breadthFirstSearch(from: Int, to: Int): List<Int>{ //Поиск в ширину
+        val deque = ArrayDeque<Int>()
+        deque.addLast(from)
         val visited = mutableMapOf<Int, Int>()
         visited.put(from, 0)
+        println(from)
         while (!deque.isEmpty()){
             val current = deque.first()
-            println(current)
-            if (current.first == to){
-                break
-            }
             deque.removeFirst()
-            for (neighbor in getNeighbors(current.first)){
+            var hasNotVisited = false
+            for (neighbor in getNeighbors(current)){
                 if (!visited.containsKey(neighbor)){
-                    visited.put(neighbor, current.second + 1)
-                    deque.addLast(Pair(neighbor, current.second + 1))
+                    hasNotVisited = true
+                    print("$neighbor ")
+                    visited.put(neighbor, visited[current]!! + 1)
+                    deque.addLast(neighbor)
                 }
             }
+            if (hasNotVisited){
+                println()
+            }
         }
-        if (!deque.isEmpty()) {
-            val way = mutableListOf<Int>()
-            val last = deque.first()
-            way.add(0, last.first)
-            var distance = last.second
-            var current = last.first
-            while (distance > 0) {
+        if (visited.containsKey(to)) {
+            val path = mutableListOf<Int>()
+            var current = to
+            path.add(current)
+            while (current != from){
                 for (neighbor in getNeighbors(current)){
-                    if (visited.containsKey(neighbor) && visited[neighbor]!! < distance){
-                        way.add(0, neighbor)
+                    if (visited[neighbor]!! < visited[current]!!){
                         current = neighbor
+                        path.add(neighbor)
                         break
                     }
                 }
-                distance--
             }
-            return way
+            return path
         } else {
             throw NoSuchElementException()
         }
     }
 
 
-    fun DFS(from: Int, to: Int): List<Int> { //Поиск в глубину
+    fun depthFirstSearch(from: Int, to: Int): List<Int> { //Поиск в глубину
         val deque = ArrayDeque<Int>()
         deque.push(from)
         val visited = mutableSetOf<Int>()
         val way = mutableListOf<Int>()
+        var isPathFound = false
         way.add(from)
+        println(from)
         while (!deque.isEmpty()) {
             val current = deque.peek()
             visited.add(current)
-            if (way.last() != current){
+            if (!isPathFound && way.last() != current){
                 way.add(current)
             }
             if (current == to){
-                return way
+                isPathFound = true
             }
             var hasNotVisitedNeighbors = false
             for (neighbor in getNeighbors(current)) {
@@ -93,12 +95,19 @@ class Graph {
                     hasNotVisitedNeighbors = true
                 }
             }
-            println()
             if (!hasNotVisitedNeighbors){
-                way.removeAt(way.lastIndex)
+                if (!isPathFound) {
+                    way.removeAt(way.lastIndex)
+                }
                 deque.pop()
+            } else {
+                println()
             }
+        }
+        if (isPathFound){
+            return way
         }
         throw NoSuchElementException()
     }
+
 }

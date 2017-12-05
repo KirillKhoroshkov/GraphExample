@@ -25,14 +25,14 @@ class Tests {
     }
 
     @Test
-    fun DFSTest() {
-        println(graph.DFS(1, 6))
-        println(graph.DFS(1, 4))
-        println(graph.DFS(3, 6))
-        println(graph.DFS(2, 4))
-        println(graph.DFS(4, 7))
-        println(graph.DFS(4, 9))
-        println(graph.DFS(4, 11))
+    fun depthFirstSearchTest() {
+        println(graph.depthFirstSearch(1, 6))
+        println(graph.depthFirstSearch(1, 4))
+        println(graph.depthFirstSearch(3, 6))
+        println(graph.depthFirstSearch(2, 4))
+        println(graph.depthFirstSearch(4, 7))
+        println(graph.depthFirstSearch(4, 9))
+        println(graph.depthFirstSearch(4, 11))
     }
 
     @Test
