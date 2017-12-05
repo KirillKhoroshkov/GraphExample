@@ -35,18 +35,17 @@ class Graph {
         visited.put(from, 0)
         while (!deque.isEmpty()){
             val current = deque.first()
+            println(current)
             if (current.first == to){
                 break
             }
             deque.removeFirst()
             for (neighbor in getNeighbors(current.first)){
                 if (!visited.containsKey(neighbor)){
-                    print(neighbor.toString() + " ")
                     visited.put(neighbor, current.second + 1)
                     deque.addLast(Pair(neighbor, current.second + 1))
                 }
             }
-            println()
         }
         if (!deque.isEmpty()) {
             val way = mutableListOf<Int>()

@@ -25,8 +25,8 @@ class WeightedGraphTests {
 
     @Test
     fun first(){
-        println(graph.algorithmOfDijkstra(4))
-        println(graph.algorithmOfDijkstra(1))
-        println(graph.algorithmOfDijkstra(10))
+        println(graph.algorithmOfDijkstra(4)[9])
+        println(graph.algorithmOfDijkstra(1)[6])
+        println(graph.algorithmOfDijkstra(10)[8])
     }
 }

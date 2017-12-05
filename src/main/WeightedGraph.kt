@@ -32,23 +32,21 @@ class WeightedGraph {
         if (!vertexes.containsKey(from)) {
             throw NoSuchElementException()
         } else {
-            val deque = ArrayDeque<Pair<Int, Int>>()
-            deque.addLast(Pair(from, 0))
+            val deque = ArrayDeque<Int>()
+            deque.addLast(from)
             val visited = mutableMapOf<Int, Int>()
             visited.put(from, 0)
             while (!deque.isEmpty()) {
                 val current = deque.pollFirst()
-                for (neighbor in getNeighbors(current.first)) {
-                    val distance = current.second + neighbor.value
-                    if (!visited.containsKey(neighbor.key)) {
-                        print(neighbor.toString() + " ")
-                        visited.put(neighbor.key, distance)
-                        deque.addLast(Pair(neighbor.key, distance))
-                    } else if (visited[neighbor.key]!! > distance) {
-                        visited.put(neighbor.key, distance)
+                for ((key, value) in getNeighbors(current)) {
+                    val distance = visited[current]!! + value
+                    if (!visited.containsKey(key)) {
+                        visited.put(key, distance)
+                        deque.addLast(key)
+                    } else if (visited[key]!! > distance) {
+                        visited[key] = distance
                     }
                 }
-                println()
             }
             return visited
         }
