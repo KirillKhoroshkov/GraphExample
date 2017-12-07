@@ -33,23 +33,18 @@ class Graph {
         deque.addLast(from)
         val visited = mutableMapOf<Int, Int>()
         visited.put(from, 0)
-        println(from)
         while (!deque.isEmpty()){
             val current = deque.first()
+            println(current)
             deque.removeFirst()
-            var hasNotVisited = false
             for (neighbor in getNeighbors(current)){
                 if (!visited.containsKey(neighbor)){
-                    hasNotVisited = true
-                    print("$neighbor ")
                     visited.put(neighbor, visited[current]!! + 1)
                     deque.addLast(neighbor)
                 }
             }
-            if (hasNotVisited){
-                println()
-            }
         }
+        println(visited)
         if (visited.containsKey(to)) {
             val path = mutableListOf<Int>()
             var current = to
@@ -58,7 +53,7 @@ class Graph {
                 for (neighbor in getNeighbors(current)){
                     if (visited[neighbor]!! < visited[current]!!){
                         current = neighbor
-                        path.add(neighbor)
+                        path.add(0, neighbor)
                         break
                     }
                 }
@@ -73,41 +68,37 @@ class Graph {
     fun depthFirstSearch(from: Int, to: Int): List<Int> { //Поиск в глубину
         val deque = ArrayDeque<Int>()
         deque.push(from)
-        val visited = mutableSetOf<Int>()
-        val way = mutableListOf<Int>()
-        var isPathFound = false
-        way.add(from)
-        println(from)
+        val visited = mutableMapOf<Int, Int>()
+        visited.put(from, 0)
         while (!deque.isEmpty()) {
             val current = deque.peek()
-            visited.add(current)
-            if (!isPathFound && way.last() != current){
-                way.add(current)
-            }
-            if (current == to){
-                isPathFound = true
-            }
-            var hasNotVisitedNeighbors = false
+            deque.pop()
+            println(current)
             for (neighbor in getNeighbors(current)) {
                 if (!visited.contains(neighbor)) {
-                    print(neighbor.toString() + " ")
                     deque.push(neighbor)
-                    hasNotVisitedNeighbors = true
+                    visited.put(neighbor, visited[current]!! + 1)
                 }
             }
-            if (!hasNotVisitedNeighbors){
-                if (!isPathFound) {
-                    way.removeAt(way.lastIndex)
+        }
+        println(visited)
+        if (visited.containsKey(to)) {
+            val path = mutableListOf<Int>()
+            var current = to
+            path.add(current)
+            while (current != from){
+                for (neighbor in getNeighbors(current)){
+                    if (visited[neighbor]!! < visited[current]!!){
+                        current = neighbor
+                        path.add(0, neighbor)
+                        break
+                    }
                 }
-                deque.pop()
-            } else {
-                println()
             }
+            return path
+        } else {
+            throw NoSuchElementException()
         }
-        if (isPathFound){
-            return way
-        }
-        throw NoSuchElementException()
     }
 
 }

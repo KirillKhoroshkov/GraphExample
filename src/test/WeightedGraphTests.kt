@@ -12,7 +12,7 @@ class WeightedGraphTests {
         }
         graph.makeNeighbors(1, 10, 20)
         graph.makeNeighbors(1, 3, 8)
-        graph.makeNeighbors(2, 10, 6)
+        graph.makeNeighbors(2, 10, 60)
         graph.makeNeighbors(2, 4, 1)
         graph.makeNeighbors(3, 4, 20)
         graph.makeNeighbors(4, 5, 2)
@@ -25,7 +25,7 @@ class WeightedGraphTests {
 
     @Test
     fun first(){
-        println(graph.algorithmOfDijkstra(4)[9])
+        println(graph.algorithmOfDijkstra(4))
         println(graph.algorithmOfDijkstra(1)[6])
         println(graph.algorithmOfDijkstra(10)[8])
     }

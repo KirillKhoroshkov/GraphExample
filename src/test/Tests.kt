@@ -33,6 +33,7 @@ class Tests {
         println(graph.depthFirstSearch(4, 7))
         println(graph.depthFirstSearch(4, 9))
         println(graph.depthFirstSearch(4, 11))
+        println("_____________________________")
     }
 
     @Test
@@ -43,5 +44,6 @@ class Tests {
         println(graph.breadthFirstSearch(2, 4))
         println(graph.breadthFirstSearch(4, 7))
         println(graph.breadthFirstSearch(5, 4))
+        println("_____________________________")
     }
 }
