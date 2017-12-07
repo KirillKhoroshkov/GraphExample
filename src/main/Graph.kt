@@ -75,7 +75,7 @@ class Graph {
             deque.pop()
             println(current)
             for (neighbor in getNeighbors(current)) {
-                if (!visited.contains(neighbor)) {
+                if (!visited.containsKey(neighbor)) {
                     deque.push(neighbor)
                     visited.put(neighbor, visited[current]!! + 1)
                 }
